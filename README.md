@@ -4,7 +4,7 @@ Ilmalogiya — ilm-fan, ta'lim va madaniyatga oid kontentlarni qulay va zamonavi
 
 Rasmiy sayt: https://ilmalogiya.uz/
 
-![Ilmalogiya logo](assets/images/logos/Ilmalogiya.png)
+![Ilmalogiya logo](assets/logos/logo.png)
 
 **Qisqacha ma'lumot**
 - **Nomi:** Ilmalogiya
