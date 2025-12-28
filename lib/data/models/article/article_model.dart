@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '../../../generated/article/article_model.freezed.dart';
@@ -8,8 +10,10 @@ abstract class ArticleModel with _$ArticleModel {
   const factory ArticleModel({
     required int id,
     @Default(<String>[]) List<String> tags,
-    String? title,
-    String? description,
+    @Default("Article title") String title,
+    @Default("Article description") String description,
+    String? filePath,
+    @Default(0) int views,
   }) = _ArticleModel;
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) =>
@@ -17,7 +21,4 @@ abstract class ArticleModel with _$ArticleModel {
 
   static List<ArticleModel> fromList(List? list) =>
       list?.map((e) => ArticleModel.fromJson(e)).toList() ?? [];
-
-  static Map<String, dynamic> customToJson(ArticleModel instance) =>
-      <String, dynamic>{};
 }

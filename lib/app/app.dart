@@ -39,8 +39,8 @@ class AppView extends StatelessWidget {
     return KeyboardDismisser(
       child: AdaptiveTheme(
         light: AppTheme.lightTheme,
-        dark: AppTheme.darkTheme,
-        initial: .system,
+        dark: AppTheme.lightTheme,
+        initial: .light,
         builder: (light, dark) => GlobalLoaderOverlay(
           overlayColor: Colors.grey.withOpacityCustom(0.1),
 

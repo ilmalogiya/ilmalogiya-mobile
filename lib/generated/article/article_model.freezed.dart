@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ArticleModel {
 
- int get id; List<String> get tags; String? get title; String? get description;
+ int get id; List<String> get tags; String get title; String get description; String? get filePath; int get views;
 /// Create a copy of ArticleModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ArticleModelCopyWith<ArticleModel> get copyWith => _$ArticleModelCopyWithImpl<A
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ArticleModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.tags, tags)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ArticleModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.tags, tags)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.filePath, filePath) || other.filePath == filePath)&&(identical(other.views, views) || other.views == views));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(tags),title,description);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(tags),title,description,filePath,views);
 
 @override
 String toString() {
-  return 'ArticleModel(id: $id, tags: $tags, title: $title, description: $description)';
+  return 'ArticleModel(id: $id, tags: $tags, title: $title, description: $description, filePath: $filePath, views: $views)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ArticleModelCopyWith<$Res>  {
   factory $ArticleModelCopyWith(ArticleModel value, $Res Function(ArticleModel) _then) = _$ArticleModelCopyWithImpl;
 @useResult
 $Res call({
- int id, List<String> tags, String? title, String? description
+ int id, List<String> tags, String title, String description, String? filePath, int views
 });
 
 
@@ -65,13 +65,15 @@ class _$ArticleModelCopyWithImpl<$Res>
 
 /// Create a copy of ArticleModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? tags = null,Object? title = freezed,Object? description = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? tags = null,Object? title = null,Object? description = null,Object? filePath = freezed,Object? views = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,tags: null == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
-as List<String>,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String?,
+as List<String>,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,filePath: freezed == filePath ? _self.filePath : filePath // ignore: cast_nullable_to_non_nullable
+as String?,views: null == views ? _self.views : views // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -156,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  List<String> tags,  String? title,  String? description)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  List<String> tags,  String title,  String description,  String? filePath,  int views)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ArticleModel() when $default != null:
-return $default(_that.id,_that.tags,_that.title,_that.description);case _:
+return $default(_that.id,_that.tags,_that.title,_that.description,_that.filePath,_that.views);case _:
   return orElse();
 
 }
@@ -177,10 +179,10 @@ return $default(_that.id,_that.tags,_that.title,_that.description);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  List<String> tags,  String? title,  String? description)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  List<String> tags,  String title,  String description,  String? filePath,  int views)  $default,) {final _that = this;
 switch (_that) {
 case _ArticleModel():
-return $default(_that.id,_that.tags,_that.title,_that.description);case _:
+return $default(_that.id,_that.tags,_that.title,_that.description,_that.filePath,_that.views);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +199,10 @@ return $default(_that.id,_that.tags,_that.title,_that.description);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  List<String> tags,  String? title,  String? description)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  List<String> tags,  String title,  String description,  String? filePath,  int views)?  $default,) {final _that = this;
 switch (_that) {
 case _ArticleModel() when $default != null:
-return $default(_that.id,_that.tags,_that.title,_that.description);case _:
+return $default(_that.id,_that.tags,_that.title,_that.description,_that.filePath,_that.views);case _:
   return null;
 
 }
@@ -212,7 +214,7 @@ return $default(_that.id,_that.tags,_that.title,_that.description);case _:
 @JsonSerializable()
 
 class _ArticleModel implements ArticleModel {
-  const _ArticleModel({required this.id, final  List<String> tags = const <String>[], this.title, this.description}): _tags = tags;
+  const _ArticleModel({required this.id, final  List<String> tags = const <String>[], this.title = "Article title", this.description = "Article description", this.filePath, this.views = 0}): _tags = tags;
   factory _ArticleModel.fromJson(Map<String, dynamic> json) => _$ArticleModelFromJson(json);
 
 @override final  int id;
@@ -223,8 +225,10 @@ class _ArticleModel implements ArticleModel {
   return EqualUnmodifiableListView(_tags);
 }
 
-@override final  String? title;
-@override final  String? description;
+@override@JsonKey() final  String title;
+@override@JsonKey() final  String description;
+@override final  String? filePath;
+@override@JsonKey() final  int views;
 
 /// Create a copy of ArticleModel
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ArticleModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._tags, _tags)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ArticleModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._tags, _tags)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.filePath, filePath) || other.filePath == filePath)&&(identical(other.views, views) || other.views == views));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_tags),title,description);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_tags),title,description,filePath,views);
 
 @override
 String toString() {
-  return 'ArticleModel(id: $id, tags: $tags, title: $title, description: $description)';
+  return 'ArticleModel(id: $id, tags: $tags, title: $title, description: $description, filePath: $filePath, views: $views)';
 }
 
 
@@ -259,7 +263,7 @@ abstract mixin class _$ArticleModelCopyWith<$Res> implements $ArticleModelCopyWi
   factory _$ArticleModelCopyWith(_ArticleModel value, $Res Function(_ArticleModel) _then) = __$ArticleModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, List<String> tags, String? title, String? description
+ int id, List<String> tags, String title, String description, String? filePath, int views
 });
 
 
@@ -276,13 +280,15 @@ class __$ArticleModelCopyWithImpl<$Res>
 
 /// Create a copy of ArticleModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? tags = null,Object? title = freezed,Object? description = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? tags = null,Object? title = null,Object? description = null,Object? filePath = freezed,Object? views = null,}) {
   return _then(_ArticleModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,tags: null == tags ? _self._tags : tags // ignore: cast_nullable_to_non_nullable
-as List<String>,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String?,
+as List<String>,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,filePath: freezed == filePath ? _self.filePath : filePath // ignore: cast_nullable_to_non_nullable
+as String?,views: null == views ? _self.views : views // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
