@@ -10,8 +10,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
+  shared_preferences: ^2.5.3
+  intl: any
   cupertino_icons: ^1.0.8
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.7
+  loader_overlay: ^5.0.0
+  freezed_annotation: ^3.1.0
+  flutter_gen: ^5.12.0
+  json_annotation: ^4.9.0
+  keyboard_dismisser: ^3.0.0
+  adaptive_theme: ^3.7.2
 
 dev_dependencies:
   flutter_test:
@@ -20,9 +30,19 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.4
   flutter_native_splash: ^2.4.7
+  build_runner: ^2.10.4
+  freezed: ^3.2.3
+  flutter_gen_runner: ^5.12.0
+  json_serializable: ^6.11.2
 
 flutter:
+  generate: true
   uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/svg/
+    - assets/logos/
 
 flutter_launcher_icons:
   android: 'ic_launcher'
@@ -36,12 +56,12 @@ flutter_launcher_icons:
 flutter_native_splash:
   color: "#f8eedb"
   image: assets/logos/logo_banner_bigger.png
-  color_dark: "#f8eedb"
+  color_dark: "#ffffff"
   image_dark: assets/logos/logo_banner_bigger.png
 
   android_12:
     image: assets/logos/logo_banner.png
     icon_background_color: "#f8eedb"
     image_dark: assets/logos/logo_banner.png
-    icon_background_color_dark: "#f8eedb"
+    icon_background_color_dark: "#ffffff"
 

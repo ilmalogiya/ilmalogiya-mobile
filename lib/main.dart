@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ilmalogiya/app/app.dart';
 
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
@@ -7,13 +8,5 @@ void main(List<String> args) {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Scaffold());
-  }
+  runApp(const App());
 }
