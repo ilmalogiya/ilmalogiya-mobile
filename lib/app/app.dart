@@ -1,6 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ilmalogiya/utils/ui/app_colors.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -45,7 +46,19 @@ class AppView extends StatelessWidget {
         initial: .light,
         builder: (light, dark) => GlobalLoaderOverlay(
           overlayColor: Colors.grey.withOpacityCustom(0.1),
-
+          overlayWidgetBuilder: (progress) {
+            return const Center(
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    AppColors.primaryColor,
+                  ),
+                ),
+              ),
+            );
+          },
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             darkTheme: dark,

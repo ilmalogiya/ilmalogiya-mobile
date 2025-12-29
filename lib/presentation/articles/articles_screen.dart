@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ilmalogiya/presentation/app_widgets/shimmer/list_shimmer.dart';
 import '../../cubit/articles/articles_cubit.dart';
 import 'widget/article_app_bar.dart';
 import 'widget/article_card_widget.dart';
@@ -14,7 +15,7 @@ class ArticlesScreen extends StatelessWidget {
       body: BlocBuilder<ArticlesCubit, ArticlesState>(
         builder: (context, state) {
           if (state.status == .submissionInProgress) {
-            return const Center(child: CircularProgressIndicator());
+            return const ListShimmer();
           }
           if (state.status == .submissionFailure) {
             return Center(child: Text('Error: ${state.errorMessage}'));

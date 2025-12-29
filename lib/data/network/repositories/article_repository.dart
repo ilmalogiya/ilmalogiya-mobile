@@ -9,6 +9,9 @@ class ArticleRepository {
         queryParams: {'page': page.toString()},
       );
 
+  Future<CustomHttpResponse> getArticle(String slug) =>
+      HttpRequestsService.getRequest(endPoint: '${UrlConstants.articles}$slug');
+
   Future<CustomHttpResponse> getTags() =>
       HttpRequestsService.getRequest(endPoint: UrlConstants.tags);
 }
