@@ -12,7 +12,7 @@ abstract class ArticleModel with _$ArticleModel {
     @Default(<String>[]) List<String> tags,
     @Default("Article title") String title,
     @Default("Article description") String description,
-    String? filePath,
+    String? file,
     @Default(0) int views,
   }) = _ArticleModel;
 

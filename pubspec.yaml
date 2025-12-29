@@ -23,6 +23,8 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   adaptive_theme: ^3.7.2
   http: ^1.6.0
+  cached_network_image: ^3.4.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -44,6 +46,19 @@ flutter:
     - assets/images/
     - assets/svg/
 
+  fonts:
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Lora-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Lora-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Lora-Bold.ttf
+          weight: 700
+
+
 flutter_launcher_icons:
   android: 'ic_launcher'
   ios: true
@@ -54,14 +69,14 @@ flutter_launcher_icons:
   adaptive_icon_foreground: 'assets/logos/logo.png'
 
 flutter_native_splash:
-  color: "#f8eedb"
+  color: "#f5e6cc"
   image: assets/logos/logo_banner_bigger.png
   color_dark: "#ffffff"
   image_dark: assets/logos/logo_banner_bigger.png
 
   android_12:
     image: assets/logos/logo_banner.png
-    icon_background_color: "#f8eedb"
+    icon_background_color: "#f5e6cc"
     image_dark: assets/logos/logo_banner.png
     icon_background_color_dark: "#ffffff"
 

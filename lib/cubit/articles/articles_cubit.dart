@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/cubit/base_cubit/base_cubit.dart';
-import 'package:ilmalogiya/data/models/article/article_model.dart';
-import 'package:ilmalogiya/data/models/id_name/id_name_model.dart';
-import 'package:ilmalogiya/data/models/status/form_status.dart';
+import '../base_cubit/base_cubit.dart';
+import '../../data/models/article/article_model.dart';
+import '../../data/models/id_name/id_name_model.dart';
+import '../../data/models/status/form_status.dart';
 
 part 'articles_state.dart';
 

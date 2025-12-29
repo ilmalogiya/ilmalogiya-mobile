@@ -1,14 +1,15 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ilmalogiya/cubit/articles/articles_cubit.dart';
-import 'package:ilmalogiya/data/network/app_repository.dart';
-import 'package:ilmalogiya/presentation/router.dart';
-import 'package:ilmalogiya/utils/constants/routes.dart';
-import 'package:ilmalogiya/utils/extensions/color_extensions.dart';
-import 'package:ilmalogiya/utils/ui/app_theme.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+
+import '../cubit/articles/articles_cubit.dart';
+import '../data/network/app_repository.dart';
+import '../presentation/router.dart';
+import '../utils/constants/routes.dart';
+import '../utils/extensions/color_extensions.dart';
+import '../utils/ui/app_theme.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -22,11 +23,12 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
+            lazy: false,
             create: (context) =>
                 ArticlesCubit(appRepository: context.read<AppRepository>()),
           ),
         ],
-        child: AppView(),
+        child: const AppView(),
       ),
     );
   }

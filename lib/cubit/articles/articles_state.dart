@@ -16,7 +16,7 @@ class ArticlesState extends BaseState {
   final int page;
   final bool isAllPagesLoaded;
 
-  factory ArticlesState.initial() => ArticlesState(
+  factory ArticlesState.initial() => const ArticlesState(
     status: .pure,
     actionMessage: "",
     errorMessage: "",

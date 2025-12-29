@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ilmalogiya/data/models/status/form_status.dart';
-import 'package:ilmalogiya/data/network/app_repository.dart';
-import 'package:ilmalogiya/data/network/custom_http_response.dart';
-import 'package:ilmalogiya/presentation/app_widgets/dialog/error_message_dialog.dart';
+import '../../data/models/status/form_status.dart';
+import '../../data/network/app_repository.dart';
+import '../../data/network/custom_http_response.dart';
+import '../../presentation/app_widgets/dialog/error_message_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 part 'base_state.dart';

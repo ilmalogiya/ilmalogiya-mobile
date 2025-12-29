@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ilmalogiya/cubit/articles/articles_cubit.dart';
+import '../../cubit/articles/articles_cubit.dart';
+import 'widget/article_app_bar.dart';
+import 'widget/article_card_widget.dart';
 
 class ArticlesScreen extends StatelessWidget {
   const ArticlesScreen({super.key});
@@ -9,16 +10,7 @@ class ArticlesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Articles'),
-        backgroundColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarIconBrightness: .dark,
-          statusBarBrightness: .light,
-        ),
-        elevation: 0,
-        scrolledUnderElevation: 0,
-      ),
+      appBar: const ArticleAppBar(),
       body: BlocBuilder<ArticlesCubit, ArticlesState>(
         builder: (context, state) {
           if (state.status == .submissionInProgress) {
@@ -28,18 +20,11 @@ class ArticlesScreen extends StatelessWidget {
             return Center(child: Text('Error: ${state.errorMessage}'));
           }
           return ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(16.0),
             itemCount: state.articles.length,
-            itemBuilder: (context, index) {
-              final article = state.articles[index];
-              return ListTile(
-                title: Text(article.title),
-                subtitle: Text(
-                  article.description,
-                  maxLines: 3,
-                  overflow: .ellipsis,
-                ),
-              );
-            },
+            itemBuilder: (context, index) =>
+                ArticleCardWidget(article: state.articles[index]),
           );
         },
       ),
