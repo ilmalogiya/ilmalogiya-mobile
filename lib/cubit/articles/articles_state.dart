@@ -6,11 +6,13 @@ class ArticlesState extends BaseState {
     super.actionMessage,
     super.errorMessage,
     required this.articles,
+    required this.tags,
     required this.page,
     required this.isAllPagesLoaded,
   });
 
   final List<ArticleModel> articles;
+  final List<IdNameModel> tags;
   final int page;
   final bool isAllPagesLoaded;
 
@@ -19,6 +21,7 @@ class ArticlesState extends BaseState {
     actionMessage: "",
     errorMessage: "",
     articles: [],
+    tags: [],
     page: 1,
     isAllPagesLoaded: false,
   );
@@ -29,6 +32,7 @@ class ArticlesState extends BaseState {
     String? actionMessage,
     String? errorMessage,
     List<ArticleModel>? articles,
+    List<IdNameModel>? tags,
     int? page,
     bool? isAllPagesLoaded,
   }) {
@@ -37,6 +41,7 @@ class ArticlesState extends BaseState {
       actionMessage: actionMessage ?? this.actionMessage,
       errorMessage: errorMessage ?? this.errorMessage,
       articles: articles ?? this.articles,
+      tags: tags ?? this.tags,
       page: page ?? this.page,
       isAllPagesLoaded: isAllPagesLoaded ?? this.isAllPagesLoaded,
     );
@@ -48,6 +53,7 @@ class ArticlesState extends BaseState {
     actionMessage,
     errorMessage,
     articles,
+    tags,
     page,
     isAllPagesLoaded,
   ];

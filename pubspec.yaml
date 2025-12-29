@@ -43,7 +43,6 @@ flutter:
     - assets/
     - assets/images/
     - assets/svg/
-    - assets/logos/
 
 flutter_launcher_icons:
   android: 'ic_launcher'

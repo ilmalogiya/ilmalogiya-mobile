@@ -49,7 +49,7 @@ class AppView extends StatelessWidget {
             darkTheme: dark,
             theme: light,
             onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: RouteNames.splashRoute,
+            initialRoute: RouteNames.articlesRoute,
             navigatorKey: navigatorKey,
             builder: (context, child) {
               return SafeArea(

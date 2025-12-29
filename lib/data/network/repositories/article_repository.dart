@@ -8,4 +8,7 @@ class ArticleRepository {
         endPoint: UrlConstants.articles,
         queryParams: {'page': page.toString()},
       );
+
+  Future<CustomHttpResponse> getTags() =>
+      HttpRequestsService.getRequest(endPoint: UrlConstants.tags);
 }
