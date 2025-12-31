@@ -1,6 +1,6 @@
+import '../../../utils/constants/endpoint_constants.dart';
 import '../custom_http_response.dart';
 import '../http_requests_service.dart';
-import '../../../utils/constants/endpoint_constants.dart';
 
 class ArticleRepository {
   Future<CustomHttpResponse> getArticles(int page) =>

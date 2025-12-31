@@ -9,14 +9,14 @@ class ArticleCardShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const .symmetric(vertical: 4),
       child: Shimmer.fromColors(
         baseColor: AppColors.scaffoldBackgroundColor,
         highlightColor: AppColors.cardColor,
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: AppColors.cardColor,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: .circular(16),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacityCustom(0.1),

@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ilmalogiya/cubit/articles/articles_cubit.dart';
-import 'package:ilmalogiya/data/models/article/article_model.dart';
-import 'package:ilmalogiya/presentation/app_widgets/shimmer/image_shimmer.dart';
-import 'package:ilmalogiya/presentation/articles/widget/article_app_bar.dart';
-import 'package:ilmalogiya/utils/extensions/color_extensions.dart';
-import 'package:ilmalogiya/utils/extensions/string_extensions.dart';
-import 'package:ilmalogiya/utils/ui/app_colors.dart';
+import '../../cubit/articles/articles_cubit.dart';
+import '../../data/models/article/article_model.dart';
+import '../app_widgets/shimmer/image_shimmer.dart';
+import '../app_widgets/article_app_bar.dart';
+import '../../utils/extensions/color_extensions.dart';
+import '../../utils/extensions/string_extensions.dart';
+import '../../utils/ui/app_colors.dart';
 
 class ArticleDetailScreen extends StatefulWidget {
   const ArticleDetailScreen({super.key, required this.article});
@@ -49,11 +49,11 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
       appBar: const ArticleAppBar(),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(6),
+        padding: const .all(6),
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: AppColors.cardColor,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: .circular(16),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacityCustom(0.1),
@@ -63,7 +63,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const .all(12.0),
             child: Column(
               spacing: 8,
               crossAxisAlignment: .start,
@@ -72,36 +72,42 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                   Hero(
                     tag: article.file!,
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                      borderRadius: const .all(.circular(16)),
                       child: CachedNetworkImage(
                         imageUrl: article.file!,
                         fit: BoxFit.cover,
                         progressIndicatorBuilder: (context, url, progress) =>
                             const ImageShimmer(
-                              width: double.infinity,
+                              width: .infinity,
                               height: 200,
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16),
-                              ),
+                              borderRadius: .vertical(top: .circular(16)),
                             ),
+                        errorWidget: (context, url, error) => SizedBox(
+                          width: .infinity,
+                          height: 200,
+                          child: Center(
+                            child: Icon(
+                              Icons.broken_image,
+                              size: 48,
+                              color: Colors.grey.withOpacityCustom(0.5),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 const SizedBox.shrink(),
                 Wrap(
                   spacing: 8,
-                  children: List.generate(
+                  children: .generate(
                     article.tags.length,
                     (index) => DecoratedBox(
                       decoration: BoxDecoration(
                         color: AppColors.scaffoldBackgroundColor,
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: .circular(50),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 9,
-                          vertical: 3,
-                        ),
+                        padding: const .symmetric(horizontal: 9, vertical: 3),
                         child: Text(
                           article.tags[index],
                           style: Theme.of(context).textTheme.bodySmall,
@@ -140,7 +146,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                   ],
                 ),
                 Text(
-                  article.description.replaceAll("<br>", "\n"),
+                  article.description.removeHtmlTags(),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],

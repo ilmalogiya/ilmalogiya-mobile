@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/data/models/article/article_model.dart';
+import '../data/models/article/article_model.dart';
 import 'article_detail/article_detail_screen.dart';
 import 'articles/articles_screen.dart';
 import '../utils/constants/routes.dart';

@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
-import '../../../generated/assets/assets.gen.dart';
-import '../../../utils/ui/app_colors.dart';
+import '../../generated/assets/assets.gen.dart';
+import '../../utils/ui/app_colors.dart';
 
 class ArticleAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ArticleAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool isRoot = ModalRoute.of(context)?.isFirst ?? false;
     return AppBar(
+      leading: !isRoot
+          ? IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: AppColors.primaryColor,
+                size: 20,
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          : null,
       automaticallyImplyLeading: false,
       title: Row(
         children: [
@@ -22,6 +33,7 @@ class ArticleAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         InkWell(
+          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
           onTap: () {},
           child: const DecoratedBox(
             decoration: BoxDecoration(
@@ -29,7 +41,7 @@ class ArticleAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: AppColors.primaryColor,
             ),
             child: Padding(
-              padding: EdgeInsets.all(6.0),
+              padding: .all(6.0),
               child: Icon(Icons.search, size: 16, color: AppColors.cardColor),
             ),
           ),

@@ -11,7 +11,7 @@ class ImageShimmer extends StatelessWidget {
     super.key,
     required this.width,
     required this.height,
-    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
+    this.borderRadius = const .all(.circular(12)),
   });
 
   @override

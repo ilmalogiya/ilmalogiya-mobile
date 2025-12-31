@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ilmalogiya/data/models/converters/image_filter_converter.dart';
 
 part '../../../generated/article/article_model.freezed.dart';
 part '../../../generated/article/article_model.g.dart';
@@ -12,7 +13,7 @@ abstract class ArticleModel with _$ArticleModel {
     @Default(<String>[]) List<String> tags,
     @Default("Article title") String title,
     @Default("Article description") String description,
-    String? file,
+    @ImageFilterConverter() String? file,
     @Default(0) int views,
     String? slug,
     DateTime? publishedDate,

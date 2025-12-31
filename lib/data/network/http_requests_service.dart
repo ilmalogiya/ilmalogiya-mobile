@@ -21,7 +21,9 @@ class HttpRequestsService {
   }) async {
     Uri uri = Uri.https(UrlConstants.baseApiUrl, "/api/$endPoint", queryParams);
     try {
-      http.Response response = await http.get(uri, headers: getHeaders());
+      http.Response response = await http
+          .get(uri, headers: getHeaders())
+          .timeout(durationTimeout);
 
       if (response.statusCode == HttpStatus.ok) {
         var result = jsonDecode(response.body);
