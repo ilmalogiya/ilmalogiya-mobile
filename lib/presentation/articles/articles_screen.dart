@@ -12,7 +12,7 @@ class ArticlesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
       child: Scaffold(
-        appBar: const ArticleAppBar(),
+        appBar: const ArticleAppBar(enableSearch: true),
         body: BlocBuilder<ArticlesCubit, ArticlesState>(
           builder: (context, state) {
             if (state.status == .submissionInProgress) {
