@@ -11,16 +11,6 @@ class ArticleAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     bool isRoot = ModalRoute.of(context)?.isFirst ?? false;
     return AppBar(
-      // leading: !isRoot
-      //     ? IconButton(
-      //         icon: const Icon(
-      //           Icons.arrow_back,
-      //           color: AppColors.primaryColor,
-      //           size: 20,
-      //         ),
-      //         onPressed: () => Navigator.of(context).pop(),
-      //       )
-      //     : null,
       automaticallyImplyLeading: false,
       title: Row(
         children: [
