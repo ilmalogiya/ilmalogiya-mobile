@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/utils/constants/routes.dart';
 import '../base_cubit/base_cubit.dart';
 import '../../data/models/article/article_model.dart';
 import '../../data/models/id_name/id_name_model.dart';
@@ -35,21 +34,21 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
     },
   );
 
-  Future<void> fetchArticle({
+  Future<ArticleModel> fetchArticle({
     required BuildContext context,
     required String slug,
-  }) => processLessApiRequest(
-    context: context,
-    showError: true,
-    showLoader: true,
-    request: appRepository.articleRepository.getArticle(slug),
-    onSuccess: (result) {
-      ArticleModel article = ArticleModel.fromJson(result);
-      Navigator.pushNamed(
-        context,
-        RouteNames.articleDetailRoute,
-        arguments: article,
-      );
-    },
-  );
+  }) async {
+    ArticleModel article = ArticleModel.empty();
+    await processLessApiRequest(
+      context: context,
+      showError: true,
+      showLoader: false,
+      request: appRepository.articleRepository.getArticle(slug),
+      onSuccess: (result) {
+        article = ArticleModel.fromJson(result);
+        fetchArticles();
+      },
+    );
+    return article;
+  }
 }

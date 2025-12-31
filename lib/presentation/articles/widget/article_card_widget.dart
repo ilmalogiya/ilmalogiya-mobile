@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ilmalogiya/cubit/articles/articles_cubit.dart';
+import 'package:ilmalogiya/utils/constants/routes.dart';
 import '../../../data/models/article/article_model.dart';
 import '../../app_widgets/shimmer/image_shimmer.dart';
 import '../../../utils/extensions/color_extensions.dart';
@@ -18,12 +17,11 @@ class ArticleCardWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
         onTap: () {
-          if (article.slug != null) {
-            context.read<ArticlesCubit>().fetchArticle(
-              context: context,
-              slug: article.slug!,
-            );
-          }
+          Navigator.pushNamed(
+            context,
+            RouteNames.articleDetailRoute,
+            arguments: article,
+          );
         },
         child: DecoratedBox(
           decoration: BoxDecoration(

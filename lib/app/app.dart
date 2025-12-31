@@ -60,6 +60,7 @@ class AppView extends StatelessWidget {
             );
           },
           child: MaterialApp(
+            title: 'Ilmalogiya',
             debugShowCheckedModeBanner: false,
             darkTheme: dark,
             theme: light,

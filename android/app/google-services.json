@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "157089587775",
+    "project_id": "ilmalogiya",
+    "storage_bucket": "ilmalogiya.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157089587775:android:8afb7b6feff7318e224e8a",
+        "android_client_info": {
+          "package_name": "uz.afsona_group.ilmalogiya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAADlvpJ3KxaFFy_mD5IuqZe-t9E4bSmgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

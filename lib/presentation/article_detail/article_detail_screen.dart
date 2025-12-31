@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ilmalogiya/cubit/articles/articles_cubit.dart';
 import 'package:ilmalogiya/data/models/article/article_model.dart';
 import 'package:ilmalogiya/presentation/app_widgets/shimmer/image_shimmer.dart';
 import 'package:ilmalogiya/presentation/articles/widget/article_app_bar.dart';
@@ -7,10 +9,39 @@ import 'package:ilmalogiya/utils/extensions/color_extensions.dart';
 import 'package:ilmalogiya/utils/extensions/string_extensions.dart';
 import 'package:ilmalogiya/utils/ui/app_colors.dart';
 
-class ArticleDetailScreen extends StatelessWidget {
+class ArticleDetailScreen extends StatefulWidget {
   const ArticleDetailScreen({super.key, required this.article});
 
   final ArticleModel article;
+
+  @override
+  State<ArticleDetailScreen> createState() => _ArticleDetailScreenState();
+}
+
+class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
+  late ArticleModel article;
+
+  @override
+  void initState() {
+    article = widget.article;
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (widget.article.slug != null) {
+      () async {
+        await Future.delayed(const Duration(seconds: 5));
+        if (!mounted) return;
+        article = await context.read<ArticlesCubit>().fetchArticle(
+          context: context,
+          slug: widget.article.slug!,
+        );
+        setState(() {});
+      }.call();
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
