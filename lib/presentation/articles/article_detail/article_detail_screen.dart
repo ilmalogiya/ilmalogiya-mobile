@@ -70,19 +70,16 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
               crossAxisAlignment: .start,
               children: [
                 if (article.file != null)
-                  Hero(
-                    tag: article.file!,
-                    child: InkWell(
-                      onTap: () {
-                        onOpenPhoto(
-                          closeText: "Orqaga",
-                          context: context,
-                          images: [article.file!],
-                        );
-                      },
-                      overlayColor: const WidgetStatePropertyAll(
-                        Colors.transparent,
-                      ),
+                  InkWell(
+                    onTap: () {
+                      onOpenPhoto(
+                        closeText: "Orqaga",
+                        context: context,
+                        images: [article.file!],
+                      );
+                    },
+                    child: Hero(
+                      tag: article.file!,
                       child: ClipRRect(
                         borderRadius: const .all(.circular(16)),
                         child: CachedNetworkImage(
@@ -129,7 +126,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                     ),
                   ),
                 ),
-                Text(
+                SelectableText(
                   article.title,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
@@ -158,7 +155,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                     ),
                   ],
                 ),
-                Text(
+                SelectableText(
                   article.description.removeHtmlTags(),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
