@@ -6,7 +6,13 @@ class ArticleRepository {
   Future<CustomHttpResponse> getArticles(int page) =>
       HttpRequestsService.getRequest(
         endPoint: UrlConstants.articles,
-        queryParams: {'page': page.toString()},
+        queryParams: {'page': page.toString(), 'page_size': '10'},
+      );
+
+  Future<CustomHttpResponse> searchArticles(String query) =>
+      HttpRequestsService.getRequest(
+        endPoint: UrlConstants.articles,
+        queryParams: {'search': query, 'page_size': '10', 'page': '1'},
       );
 
   Future<CustomHttpResponse> getArticle(String slug) =>

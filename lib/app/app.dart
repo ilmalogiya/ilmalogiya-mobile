@@ -13,6 +13,7 @@ import '../utils/extensions/color_extensions.dart';
 import '../utils/ui/app_theme.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -67,6 +68,7 @@ class AppView extends StatelessWidget {
             onGenerateRoute: AppRouter.generateRoute,
             initialRoute: RouteNames.articlesRoute,
             navigatorKey: navigatorKey,
+            navigatorObservers: [routeObserver],
             builder: (context, child) {
               return SafeArea(
                 top: false,

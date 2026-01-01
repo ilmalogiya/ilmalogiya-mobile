@@ -95,7 +95,7 @@ class ArticleCardWidget extends StatelessWidget {
                     ),
                     Text(
                       article.title,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
                       article.description.removeHtmlTags(),

@@ -12,27 +12,40 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
     fetchArticles();
   }
 
-  Future<void> fetchTags({BuildContext? context}) => processLessApiRequest(
-    context: context,
-    showError: true,
-    showLoader: true,
-    request: appRepository.articleRepository.getTags(),
-    onSuccess: (result) {
-      List<IdNameModel> tags = IdNameModel.fromList(result);
-      emit(state.copyWith(tags: tags));
-    },
-  );
+  List<ArticleModel> temp = [];
 
-  Future<void> fetchArticles({BuildContext? context}) => processApiRequest(
-    context: context,
-    showError: true,
-    showLoader: true,
-    request: appRepository.articleRepository.getArticles(1),
-    onSuccess: (result) {
-      List<ArticleModel> articles = ArticleModel.fromList(result['results']);
-      emit(state.copyWith(articles: articles));
-    },
-  );
+  Future<void> fetchArticles({
+    BuildContext? context,
+    bool setInitial = false,
+  }) async {
+    if (state.isAllPagesLoaded && !setInitial) return;
+    if (setInitial) {
+      temp = [];
+      emit(ArticlesState.initial());
+    }
+    processApiRequest(
+      context: context,
+      showError: true,
+      showLoader: true,
+      request: appRepository.articleRepository.getArticles(state.page),
+      onSuccess: (result) {
+        if (state.page == 1) {
+          temp = [];
+        }
+        List<ArticleModel> newArticles = ArticleModel.fromList(
+          result['results'],
+        );
+        temp.addAll(newArticles);
+        emit(
+          state.copyWith(
+            articles: temp,
+            isAllPagesLoaded: result['next'] == null,
+            page: state.page + 1,
+          ),
+        );
+      },
+    );
+  }
 
   Future<ArticleModel> fetchArticle({
     required BuildContext context,
@@ -45,10 +58,22 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
       showLoader: false,
       request: appRepository.articleRepository.getArticle(slug),
       onSuccess: (result) {
+        if (state.page == 1) {}
         article = ArticleModel.fromJson(result);
         fetchArticles();
       },
     );
     return article;
   }
+
+  Future<void> fetchTags({BuildContext? context}) => processLessApiRequest(
+    context: context,
+    showError: true,
+    showLoader: true,
+    request: appRepository.articleRepository.getTags(),
+    onSuccess: (result) {
+      List<IdNameModel> tags = IdNameModel.fromList(result);
+      emit(state.copyWith(tags: tags));
+    },
+  );
 }

@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ilmalogiya/presentation/articles/search_article/search_article_screen.dart';
 import '../data/models/article/article_model.dart';
-import 'article_detail/article_detail_screen.dart';
+import 'articles/article_detail/article_detail_screen.dart';
 import 'articles/articles_screen.dart';
 import '../utils/constants/routes.dart';
 
@@ -13,6 +15,8 @@ class AppRouter {
         return navigate(
           ArticleDetailScreen(article: settings.arguments as ArticleModel),
         );
+      case RouteNames.searchArticleRoute:
+        return navigate(const SearchArticleScreen());
       default:
         return navigate(
           Scaffold(
@@ -22,6 +26,6 @@ class AppRouter {
     }
   }
 
-  static MaterialPageRoute navigate(Widget widget) =>
-      MaterialPageRoute(builder: (context) => widget);
+  static CupertinoPageRoute navigate(Widget widget) =>
+      CupertinoPageRoute(builder: (context) => widget);
 }

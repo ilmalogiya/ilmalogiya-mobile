@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../cubit/articles/articles_cubit.dart';
-import '../../data/models/article/article_model.dart';
-import '../app_widgets/shimmer/image_shimmer.dart';
-import '../app_widgets/article_app_bar.dart';
-import '../../utils/extensions/color_extensions.dart';
-import '../../utils/extensions/string_extensions.dart';
-import '../../utils/ui/app_colors.dart';
+import 'package:photo_opener/photo_opener.dart';
+import '../../../cubit/articles/articles_cubit.dart';
+import '../../../data/models/article/article_model.dart';
+import '../../app_widgets/shimmer/image_shimmer.dart';
+import '../../app_widgets/article_app_bar.dart';
+import '../../../utils/extensions/color_extensions.dart';
+import '../../../utils/extensions/string_extensions.dart';
+import '../../../utils/ui/app_colors.dart';
 
 class ArticleDetailScreen extends StatefulWidget {
   const ArticleDetailScreen({super.key, required this.article});
@@ -71,25 +72,37 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                 if (article.file != null)
                   Hero(
                     tag: article.file!,
-                    child: ClipRRect(
-                      borderRadius: const .all(.circular(16)),
-                      child: CachedNetworkImage(
-                        imageUrl: article.file!,
-                        fit: BoxFit.cover,
-                        progressIndicatorBuilder: (context, url, progress) =>
-                            const ImageShimmer(
-                              width: .infinity,
-                              height: 200,
-                              borderRadius: .vertical(top: .circular(16)),
-                            ),
-                        errorWidget: (context, url, error) => SizedBox(
-                          width: .infinity,
-                          height: 200,
-                          child: Center(
-                            child: Icon(
-                              Icons.broken_image,
-                              size: 48,
-                              color: Colors.grey.withOpacityCustom(0.5),
+                    child: InkWell(
+                      onTap: () {
+                        onOpenPhoto(
+                          closeText: "Orqaga",
+                          context: context,
+                          images: [article.file!],
+                        );
+                      },
+                      overlayColor: const WidgetStatePropertyAll(
+                        Colors.transparent,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: const .all(.circular(16)),
+                        child: CachedNetworkImage(
+                          imageUrl: article.file!,
+                          fit: BoxFit.cover,
+                          progressIndicatorBuilder: (context, url, progress) =>
+                              const ImageShimmer(
+                                width: .infinity,
+                                height: 200,
+                                borderRadius: .vertical(top: .circular(16)),
+                              ),
+                          errorWidget: (context, url, error) => SizedBox(
+                            width: .infinity,
+                            height: 200,
+                            child: Center(
+                              child: Icon(
+                                Icons.broken_image,
+                                size: 48,
+                                color: Colors.grey.withOpacityCustom(0.5),
+                              ),
                             ),
                           ),
                         ),

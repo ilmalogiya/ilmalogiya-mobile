@@ -38,6 +38,7 @@ extension HtmlCleaner on String? {
   String removeHtmlTags() {
     if (this == null) return '';
     final regex = RegExp(r'<[^>]*>', multiLine: true, caseSensitive: false);
-    return this!.replaceAll(regex, '');
+    var str = this!.replaceAll('<br>', '\n');
+    return str.replaceAll(regex, '');
   }
 }
