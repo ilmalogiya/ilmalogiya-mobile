@@ -17,6 +17,7 @@ abstract class ArticleModel with _$ArticleModel {
     @Default(0) int views,
     String? slug,
     DateTime? publishedDate,
+    @Default(false) bool forDetail,
   }) = _ArticleModel;
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) =>

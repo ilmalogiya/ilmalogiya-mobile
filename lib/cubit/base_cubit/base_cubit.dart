@@ -42,6 +42,7 @@ class BaseCubit<TState extends BaseState> extends Cubit<TState> {
         context: context,
         onFailure: onFailure,
         showError: showError,
+        progressLess: false,
       );
     } else {
       onSuccess.call(result.data ?? {});
@@ -75,6 +76,7 @@ class BaseCubit<TState extends BaseState> extends Cubit<TState> {
         context: context,
         onFailure: onFailure,
         showError: showError,
+        progressLess: true,
       );
     } else {
       onSuccess.call(result.data ?? {});
@@ -87,24 +89,29 @@ class BaseCubit<TState extends BaseState> extends Cubit<TState> {
     BuildContext? context,
     ValueChanged<String>? onFailure,
     bool showError = false,
+    required bool progressLess,
   }) async {
-    emit(
-      state.copyWith(
-            status: FormStatus.submissionFailure,
-            errorMessage: context == null ? errorText : null,
-          )
-          as TState,
-    );
+    if (!progressLess) {
+      emit(
+        state.copyWith(
+              status: FormStatus.submissionFailure,
+              errorMessage: context == null ? errorText : null,
+            )
+            as TState,
+      );
+    }
     if (onFailure != null) {
       onFailure.call(errorText);
     }
-    emit(
-      state.copyWith(
-            status: FormStatus.submissionFailure,
-            errorMessage: context == null ? errorText : null,
-          )
-          as TState,
-    );
+    if (!progressLess) {
+      emit(
+        state.copyWith(
+              status: FormStatus.submissionFailure,
+              errorMessage: context == null ? errorText : null,
+            )
+            as TState,
+      );
+    }
     if (showError && context != null && context.mounted) {
       await showErrorMessageDialog(message: errorText, context: context);
     }

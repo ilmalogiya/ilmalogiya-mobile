@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/utils/constants/routes.dart';
-import '../../generated/assets/assets.gen.dart';
-import '../../utils/ui/app_colors.dart';
+import 'package:ilmalogiya/generated/assets/assets.gen.dart';
+import 'package:ilmalogiya/utils/ui/app_colors.dart';
+import 'package:share_plus/share_plus.dart';
 
-class ArticleAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const ArticleAppBar({super.key});
+class ArticleDetailAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
+  const ArticleDetailAppBar({super.key, required this.shareParams});
+
+  final ShareParams shareParams;
 
   @override
   Widget build(BuildContext context) {
-    bool isRoot = ModalRoute.of(context)?.isFirst ?? false;
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(
         children: [
-          if (!isRoot)
-            InkWell(
-              overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-              onTap: () => Navigator.of(context).pop(),
-              child: const Padding(
-                padding: .only(right: 8),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.primaryColor,
-                  size: 20,
-                ),
+          InkWell(
+            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+            onTap: () => Navigator.of(context).pop(),
+            child: const Padding(
+              padding: .only(right: 8),
+              child: Icon(
+                Icons.arrow_back,
+                color: AppColors.primaryColor,
+                size: 20,
               ),
             ),
+          ),
           Image.asset(
             Assets.images.brain.path,
             width: 30,
@@ -39,7 +40,7 @@ class ArticleAppBar extends StatelessWidget implements PreferredSizeWidget {
         InkWell(
           overlayColor: const WidgetStatePropertyAll(Colors.transparent),
           onTap: () {
-            Navigator.pushNamed(context, RouteNames.searchArticleRoute);
+            SharePlus.instance.share(shareParams);
           },
           child: const DecoratedBox(
             decoration: BoxDecoration(
@@ -48,7 +49,7 @@ class ArticleAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             child: Padding(
               padding: .all(6.0),
-              child: Icon(Icons.search, size: 16, color: AppColors.cardColor),
+              child: Icon(Icons.share, size: 16, color: AppColors.cardColor),
             ),
           ),
         ),

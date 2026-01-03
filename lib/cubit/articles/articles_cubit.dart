@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ilmalogiya/presentation/app_widgets/dialog/error_message_dialog.dart';
+import 'package:ilmalogiya/utils/constants/routes.dart';
 import '../base_cubit/base_cubit.dart';
 import '../../data/models/article/article_model.dart';
 import '../../data/models/id_name/id_name_model.dart';
@@ -50,17 +52,27 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
   Future<ArticleModel> fetchArticle({
     required BuildContext context,
     required String slug,
+    bool forDetail = false,
   }) async {
     ArticleModel article = ArticleModel.empty();
     await processLessApiRequest(
       context: context,
-      showError: true,
-      showLoader: false,
+      showError: false,
+      showLoader: forDetail,
       request: appRepository.articleRepository.getArticle(slug),
       onSuccess: (result) {
-        if (state.page == 1) {}
         article = ArticleModel.fromJson(result);
-        fetchArticles();
+        if (forDetail) {
+          Navigator.pushNamed(
+            context,
+            RouteNames.articleDetailRoute,
+            arguments: article.copyWith(forDetail: forDetail),
+          );
+        }
+        fetchArticles(setInitial: true);
+      },
+      onFailure: (value) {
+        showErrorMessageDialog(context: context, message: "Maqola topilmadi");
       },
     );
     return article;

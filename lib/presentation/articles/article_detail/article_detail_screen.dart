@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ilmalogiya/presentation/articles/article_detail/widget/article_detail_app_bar.dart';
 import 'package:photo_opener/photo_opener.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../cubit/articles/articles_cubit.dart';
 import '../../../data/models/article/article_model.dart';
 import '../../app_widgets/shimmer/image_shimmer.dart';
-import '../../app_widgets/article_app_bar.dart';
 import '../../../utils/extensions/color_extensions.dart';
 import '../../../utils/extensions/string_extensions.dart';
 import '../../../utils/ui/app_colors.dart';
@@ -30,7 +31,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
 
   @override
   void didChangeDependencies() {
-    if (widget.article.slug != null) {
+    if (widget.article.slug != null && !widget.article.forDetail) {
       () async {
         await Future.delayed(const Duration(seconds: 5));
         if (!mounted) return;
@@ -47,7 +48,12 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ArticleAppBar(),
+      appBar: ArticleDetailAppBar(
+        shareParams: ShareParams(
+          text:
+              "${article.title}\n\nBatafsil o‘qish 👇\nhttps://ilmalogiya.uz/posts/${article.slug}",
+        ),
+      ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const .all(6),

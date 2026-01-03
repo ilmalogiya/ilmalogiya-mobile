@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ilmalogiya/presentation/app_widgets/shimmer/card_item_shimmer.dart';
@@ -15,9 +18,12 @@ class ArticlesScreen extends StatefulWidget {
 
 class _ArticlesScreenState extends State<ArticlesScreen> {
   ScrollController scrollController = ScrollController();
+  final AppLinks _appLinks = AppLinks();
+  StreamSubscription? _sub;
 
   @override
   void initState() {
+    initAppLink();
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
@@ -28,11 +34,37 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
     super.initState();
   }
 
+  void initAppLink() async {
+    _sub = _appLinks.uriLinkStream.listen((uri) {
+      _handleLinks(uri);
+    });
+  }
+
+  void _handleLinks(Uri? uri) {
+    if (uri == null) return;
+    final segments = uri.pathSegments;
+    if (segments.length == 2) {
+      final String slug = segments[1];
+      context.read<ArticlesCubit>().fetchArticle(
+        context: context,
+        slug: slug,
+        forDetail: true,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
       child: Scaffold(
-        appBar: const ArticleAppBar(enableSearch: true),
+        appBar: const ArticleAppBar(),
         body: BlocBuilder<ArticlesCubit, ArticlesState>(
           builder: (context, state) {
             if (state.status == .submissionInProgress && state.page == 1) {
@@ -65,9 +97,13 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
     child: Column(
       mainAxisAlignment: .center,
       children: [
-        Text(
-          'Voy nimadur xato ketdi qayta urinib ko\'ring :)',
-          style: Theme.of(context).textTheme.titleMedium,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 26.0, vertical: 8),
+          child: Text(
+            'Voy nimadur xato ketdi qayta urinib ko\'ring :)',
+            style: Theme.of(context).textTheme.titleMedium,
+            textAlign: .center,
+          ),
         ),
         FilledButton(
           onPressed: () {

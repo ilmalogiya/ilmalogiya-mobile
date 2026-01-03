@@ -6,7 +6,7 @@ Future<void> showErrorMessageDialog({
 }) => showDialog(
   context: context,
   builder: (context) => AlertDialog(
-    title: const Text('Error'),
+    title: const Text('Xatolik!'),
     content: Text(message),
     actions: [
       TextButton(
