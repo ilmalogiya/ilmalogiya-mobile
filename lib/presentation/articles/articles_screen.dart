@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ilmalogiya/app/app.dart';
 import 'package:ilmalogiya/presentation/app_widgets/shimmer/card_item_shimmer.dart';
 import '../app_widgets/shimmer/list_shimmer.dart';
 import '../../cubit/articles/articles_cubit.dart';
@@ -24,6 +25,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
   @override
   void initState() {
     initAppLink();
+    handleNotifications();
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
@@ -34,23 +36,30 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
     super.initState();
   }
 
-  void initAppLink() async {
-    _sub = _appLinks.uriLinkStream.listen((uri) {
-      _handleLinks(uri);
+  void handleNotifications() {
+    notificationStreamController.stream.listen((data) {
+      if (mounted && data.containsKey('slug')) {
+        context.read<ArticlesCubit>().fetchArticle(
+          context: context,
+          slug: data['slug'],
+          forDetail: true,
+        );
+      }
     });
   }
 
-  void _handleLinks(Uri? uri) {
-    if (uri == null) return;
-    final segments = uri.pathSegments;
-    if (segments.length == 2) {
-      final String slug = segments[1];
-      context.read<ArticlesCubit>().fetchArticle(
-        context: context,
-        slug: slug,
-        forDetail: true,
-      );
-    }
+  void initAppLink() async {
+    _sub = _appLinks.uriLinkStream.listen((uri) {
+      final segments = uri.pathSegments;
+      if (segments.length == 2 && mounted) {
+        final String slug = segments[1];
+        context.read<ArticlesCubit>().fetchArticle(
+          context: context,
+          slug: slug,
+          forDetail: true,
+        );
+      }
+    });
   }
 
   @override

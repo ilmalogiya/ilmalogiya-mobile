@@ -20,8 +20,8 @@ class ArticlesState extends BaseState {
     status: .pure,
     actionMessage: "",
     errorMessage: "",
-    articles: [],
-    tags: [],
+    articles: <ArticleModel>[],
+    tags: <IdNameModel>[],
     page: 1,
     isAllPagesLoaded: false,
   );
@@ -48,7 +48,7 @@ class ArticlesState extends BaseState {
   }
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => <Object>[
     status,
     actionMessage,
     errorMessage,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +14,11 @@ import '../utils/constants/routes.dart';
 import '../utils/extensions/color_extensions.dart';
 import '../utils/ui/app_theme.dart';
 
-GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+final notificationStreamController =
+    StreamController<Map<String, dynamic>>.broadcast();
+
 
 class App extends StatelessWidget {
   const App({super.key});

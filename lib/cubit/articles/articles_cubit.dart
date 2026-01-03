@@ -14,7 +14,7 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
     fetchArticles();
   }
 
-  List<ArticleModel> temp = [];
+  List<ArticleModel> temp = <ArticleModel>[];
 
   Future<void> fetchArticles({
     BuildContext? context,
@@ -22,7 +22,7 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
   }) async {
     if (state.isAllPagesLoaded && !setInitial) return;
     if (setInitial) {
-      temp = [];
+      temp = <ArticleModel>[];
       emit(ArticlesState.initial());
     }
     processApiRequest(
@@ -32,7 +32,7 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
       request: appRepository.articleRepository.getArticles(state.page),
       onSuccess: (result) {
         if (state.page == 1) {
-          temp = [];
+          temp = <ArticleModel>[];
         }
         List<ArticleModel> newArticles = ArticleModel.fromList(
           result['results'],
