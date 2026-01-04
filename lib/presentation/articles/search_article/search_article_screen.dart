@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ilmalogiya/app/app.dart';
-import 'package:ilmalogiya/cubit/articles/articles_cubit.dart';
-import 'package:ilmalogiya/data/network/app_repository.dart';
-import 'package:ilmalogiya/presentation/articles/search_article/cubit/search_articles_cubit.dart';
-import 'package:ilmalogiya/presentation/articles/search_article/widgte/search_app_bar.dart';
-import 'package:ilmalogiya/presentation/articles/widget/article_card_widget.dart';
-import 'package:ilmalogiya/utils/search_delayer.dart';
+import '../../../app/app.dart';
+import '../../../cubit/articles/articles_cubit.dart';
+import '../../../data/network/app_repository.dart';
+import 'cubit/search_articles_cubit.dart';
+import 'widgte/search_app_bar.dart';
+import '../widget/article_card_widget.dart';
+import '../../../utils/search_delayer.dart';
 
 class SearchArticleScreen extends StatefulWidget {
   const SearchArticleScreen({super.key});

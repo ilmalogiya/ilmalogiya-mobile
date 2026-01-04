@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/presentation/app_widgets/dialog/error_message_dialog.dart';
-import 'package:ilmalogiya/utils/constants/routes.dart';
+import '../../presentation/app_widgets/dialog/error_message_dialog.dart';
+import '../../utils/constants/routes.dart';
 import '../base_cubit/base_cubit.dart';
 import '../../data/models/article/article_model.dart';
 import '../../data/models/id_name/id_name_model.dart';
@@ -15,21 +15,27 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
   }
 
   List<ArticleModel> temp = <ArticleModel>[];
+  IdNameModel? currentTag;
 
   Future<void> fetchArticles({
     BuildContext? context,
     bool setInitial = false,
+    IdNameModel? tag,
   }) async {
     if (state.isAllPagesLoaded && !setInitial) return;
     if (setInitial) {
       temp = <ArticleModel>[];
-      emit(ArticlesState.initial());
+      emit(ArticlesState.initial().copyWith(tags: state.tags));
     }
+    currentTag = tag;
     processApiRequest(
       context: context,
       showError: true,
       showLoader: true,
-      request: appRepository.articleRepository.getArticles(state.page),
+      request: appRepository.articleRepository.getArticles(
+        state.page,
+        currentTag?.name,
+      ),
       onSuccess: (result) {
         if (state.page == 1) {
           temp = <ArticleModel>[];

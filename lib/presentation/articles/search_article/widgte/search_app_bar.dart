@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/utils/ui/app_colors.dart';
+import '../../../../utils/ui/app_colors.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SearchAppBar({

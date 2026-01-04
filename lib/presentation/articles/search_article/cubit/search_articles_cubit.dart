@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/cubit/articles/articles_cubit.dart';
-import 'package:ilmalogiya/cubit/base_cubit/base_cubit.dart';
-import 'package:ilmalogiya/data/models/article/article_model.dart';
+import '../../../../cubit/articles/articles_cubit.dart';
+import '../../../../cubit/base_cubit/base_cubit.dart';
+import '../../../../data/models/article/article_model.dart';
 
 class SearchArticlesCubit extends BaseCubit<ArticlesState> {
   SearchArticlesCubit({required super.appRepository})

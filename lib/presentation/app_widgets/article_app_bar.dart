@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/utils/constants/routes.dart';
+import '../../utils/constants/routes.dart';
 import '../../generated/assets/assets.gen.dart';
 import '../../utils/ui/app_colors.dart';
 

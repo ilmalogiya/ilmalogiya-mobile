@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ilmalogiya/generated/assets/assets.gen.dart';
-import 'package:ilmalogiya/utils/ui/app_colors.dart';
+import '../../../../generated/assets/assets.gen.dart';
+import '../../../../utils/ui/app_colors.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ArticleDetailAppBar extends StatelessWidget

@@ -26,6 +26,9 @@ class ArticlesState extends BaseState {
     isAllPagesLoaded: false,
   );
 
+
+  bool isLoading() => status == .submissionInProgress && page == 1;
+
   @override
   ArticlesState copyWith({
     FormStatus? status,

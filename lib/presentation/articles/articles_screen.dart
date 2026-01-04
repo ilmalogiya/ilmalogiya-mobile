@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ilmalogiya/app/app.dart';
-import 'package:ilmalogiya/presentation/app_widgets/shimmer/card_item_shimmer.dart';
-import '../app_widgets/shimmer/list_shimmer.dart';
+import '../../app/app.dart';
+import '../app_widgets/shimmer/card_item_shimmer.dart';
+import 'widget/articles_tag_widget.dart';
 import '../../cubit/articles/articles_cubit.dart';
 import '../app_widgets/article_app_bar.dart';
 import 'widget/article_card_widget.dart';
@@ -76,9 +76,6 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
         appBar: const ArticleAppBar(),
         body: BlocBuilder<ArticlesCubit, ArticlesState>(
           builder: (context, state) {
-            if (state.status == .submissionInProgress && state.page == 1) {
-              return const ListShimmer();
-            }
             if (state.status == .submissionFailure) {
               return errorBuilder();
             }
@@ -88,12 +85,31 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
               child: ListView.builder(
                 controller: scrollController,
                 physics: const BouncingScrollPhysics(),
-                padding: const .all(16.0),
-                itemCount:
-                    state.articles.length + (state.isAllPagesLoaded ? 0 : 1),
-                itemBuilder: (context, index) => index == state.articles.length
-                    ? const ArticleCardShimmer()
-                    : ArticleCardWidget(article: state.articles[index]),
+                padding: const .symmetric(horizontal: 16.0),
+                itemCount: state.isLoading()
+                    ? 20
+                    : 1 +
+                          state.articles.length +
+                          (state.isAllPagesLoaded ? 0 : 1),
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return ArticlesTagWidget(
+                      tags: state.tags,
+                      selectedTag: context.read<ArticlesCubit>().currentTag,
+                      onTagSelected: (tag) {
+                        context.read<ArticlesCubit>().fetchArticles(
+                          setInitial: true,
+                          tag: tag,
+                        );
+                      },
+                    );
+                  }
+                  index -= 1;
+
+                  return index == state.articles.length || state.isLoading()
+                      ? const ArticleCardShimmer()
+                      : ArticleCardWidget(article: state.articles[index]);
+                },
               ),
             );
           },

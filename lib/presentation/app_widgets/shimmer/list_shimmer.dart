@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'card_item_shimmer.dart';
 
 class ListShimmer extends StatelessWidget {

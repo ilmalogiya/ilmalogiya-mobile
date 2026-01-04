@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ilmalogiya/presentation/articles/article_detail/widget/article_detail_app_bar.dart';
+import 'widget/article_detail_app_bar.dart';
 import 'package:photo_opener/photo_opener.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../cubit/articles/articles_cubit.dart';
