@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:ilmalogiya/presentation/app_widgets/shimmer/image_shimmer.dart';
 import '../../../utils/constants/routes.dart';
 import '../../../utils/extensions/string_extensions.dart';
 import '../../../data/models/article/article_model.dart';
-import '../../app_widgets/shimmer/image_shimmer.dart';
 import '../../../utils/extensions/color_extensions.dart';
 import '../../../utils/ui/app_colors.dart';
 
@@ -50,11 +51,16 @@ class ArticleCardWidget extends StatelessWidget {
                       width: .infinity,
                       fit: .cover,
                       progressIndicatorBuilder: (context, url, progress) =>
-                          const ImageShimmer(
-                            width: .infinity,
-                            height: 200,
-                            borderRadius: .vertical(top: .circular(16)),
-                          ),
+                          article.imageHash == null
+                          ? const ImageShimmer(
+                              width: .infinity,
+                              height: 200,
+                              borderRadius: .vertical(top: .circular(16)),
+                            )
+                          : BlurHash(
+                              hash: article.imageHash!,
+                              optimizationMode: .approximation,
+                            ),
                       errorWidget: (context, url, error) => Center(
                         child: Icon(
                           Icons.broken_image,

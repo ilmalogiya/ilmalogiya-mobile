@@ -18,6 +18,7 @@ abstract class ArticleModel with _$ArticleModel {
     String? slug,
     DateTime? publishedDate,
     @Default(false) bool forDetail,
+    String? imageHash,
   }) = _ArticleModel;
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) =>
@@ -26,14 +27,5 @@ abstract class ArticleModel with _$ArticleModel {
   static List<ArticleModel> fromList(List? list) =>
       list?.map((e) => ArticleModel.fromJson(e)).toList() ?? [];
 
-  static ArticleModel empty() => const ArticleModel(
-    id: 0,
-    tags: [],
-    title: '',
-    description: '',
-    file: null,
-    views: 0,
-    slug: null,
-    publishedDate: null,
-  );
+  static ArticleModel empty() => const ArticleModel(id: 0);
 }
