@@ -50,6 +50,7 @@ class ArticleCardWidget extends StatelessWidget {
                       height: 200,
                       width: .infinity,
                       fit: .cover,
+                      fadeInDuration: const Duration(milliseconds: 1000),
                       progressIndicatorBuilder: (context, url, progress) =>
                           article.imgblur == null
                           ? const ImageShimmer(
@@ -60,6 +61,7 @@ class ArticleCardWidget extends StatelessWidget {
                           : BlurHash(
                               hash: article.imgblur!,
                               optimizationMode: .approximation,
+                              duration: .zero,
                             ),
                       errorWidget: (context, url, error) => Center(
                         child: Icon(
