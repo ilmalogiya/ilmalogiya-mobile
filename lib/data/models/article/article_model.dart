@@ -18,7 +18,7 @@ abstract class ArticleModel with _$ArticleModel {
     String? slug,
     DateTime? publishedDate,
     @Default(false) bool forDetail,
-    String? imageHash,
+    String? imgblur,
   }) = _ArticleModel;
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) =>

@@ -51,14 +51,14 @@ class ArticleCardWidget extends StatelessWidget {
                       width: .infinity,
                       fit: .cover,
                       progressIndicatorBuilder: (context, url, progress) =>
-                          article.imageHash == null
+                          article.imgblur == null
                           ? const ImageShimmer(
                               width: .infinity,
                               height: 200,
                               borderRadius: .vertical(top: .circular(16)),
                             )
                           : BlurHash(
-                              hash: article.imageHash!,
+                              hash: article.imgblur!,
                               optimizationMode: .approximation,
                             ),
                       errorWidget: (context, url, error) => Center(
