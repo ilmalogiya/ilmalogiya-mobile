@@ -3,10 +3,14 @@ import '../custom_http_response.dart';
 import '../http_requests_service.dart';
 
 class ArticleRepository {
-  Future<CustomHttpResponse> getArticles(int page, String? tag) =>
+  Future<CustomHttpResponse> getArticles(int page, List<String>? tags) =>
       HttpRequestsService.getRequest(
         endPoint: UrlConstants.articles,
-        queryParams: {'page': page.toString(), 'page_size': '10', if (tag != null) 'tag': tag},
+        queryParams: {
+          'page': page.toString(),
+          'page_size': '10',
+          if (tags != null) 'tag': tags.join(","),
+        },
       );
 
   Future<CustomHttpResponse> searchArticles(String query) =>

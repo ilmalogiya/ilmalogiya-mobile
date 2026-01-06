@@ -93,15 +93,40 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                           (state.isAllPagesLoaded ? 0 : 1),
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return ArticlesTagWidget(
-                      tags: state.tags,
-                      selectedTag: context.read<ArticlesCubit>().currentTag,
-                      onTagSelected: (tag) {
-                        context.read<ArticlesCubit>().fetchArticles(
-                          setInitial: true,
-                          tag: tag,
-                        );
-                      },
+                    return Column(
+                      crossAxisAlignment: .start,
+                      mainAxisAlignment: .start,
+                      mainAxisSize: .min,
+                      children: [
+                        ArticlesTagWidget(
+                          tags: state.tags,
+                          selectedTags: context
+                              .read<ArticlesCubit>()
+                              .currentTags,
+                          onTagSelected: (tags) {
+                            context.read<ArticlesCubit>().fetchArticles(
+                              setInitial: true,
+                              tags: tags,
+                            );
+                          },
+                        ),
+                        if (state.articles.isEmpty && !state.isLoading()) ...[
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.2,
+                          ),
+
+                          Center(
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              child: Text(
+                                'Kechirasiz, siz tanlagan taglar bo\'yicha hali maqolalar mavjud emas',
+                                style: Theme.of(context).textTheme.titleMedium,
+                                textAlign: .center,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
                     );
                   }
                   index -= 1;

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'articles/search_article/search_article_screen.dart';
+
 import '../data/models/article/article_model.dart';
+import '../utils/constants/routes.dart';
 import 'articles/article_detail/article_detail_screen.dart';
 import 'articles/articles_screen.dart';
-import '../utils/constants/routes.dart';
+import 'articles/search_article/search_article_screen.dart';
 
 class AppRouter {
   static Route? generateRoute(RouteSettings settings) {

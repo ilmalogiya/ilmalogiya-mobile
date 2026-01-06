@@ -6,13 +6,13 @@ class ArticlesTagWidget extends StatelessWidget {
   const ArticlesTagWidget({
     super.key,
     required this.tags,
-    required this.selectedTag,
+    required this.selectedTags,
     required this.onTagSelected,
   });
 
   final List<IdNameModel> tags;
-  final IdNameModel? selectedTag;
-  final ValueChanged<IdNameModel?> onTagSelected;
+  final List<IdNameModel> selectedTags;
+  final ValueChanged<List<IdNameModel>> onTagSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +20,20 @@ class ArticlesTagWidget extends StatelessWidget {
       children: tags.isEmpty
           ? []
           : [
-              button(context, "Hammasi", selectedTag == null, () {
-                onTagSelected(null);
+              button(context, "Hammasi", selectedTags.isEmpty, () {
+                onTagSelected([]);
               }),
               for (var tag in tags)
-                button(context, tag.name, selectedTag == tag, () {
-                  onTagSelected(tag);
+                button(context, tag.name, selectedTags.contains(tag), () {
+                  if (selectedTags.contains(tag)) {
+                    final newSelectedTags = List<IdNameModel>.from(
+                      selectedTags,
+                    );
+                    newSelectedTags.remove(tag);
+                    onTagSelected(newSelectedTags);
+                    return;
+                  }
+                  onTagSelected([...selectedTags, tag]);
                 }),
             ],
     );

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
-import 'package:ilmalogiya/presentation/app_widgets/shimmer/image_shimmer.dart';
+import '../../app_widgets/shimmer/image_shimmer.dart';
 import '../../../utils/constants/routes.dart';
 import '../../../utils/extensions/string_extensions.dart';
 import '../../../data/models/article/article_model.dart';
@@ -45,31 +45,53 @@ class ArticleCardWidget extends StatelessWidget {
                   tag: article.file!,
                   child: ClipRRect(
                     borderRadius: const .vertical(top: .circular(16)),
-                    child: CachedNetworkImage(
-                      imageUrl: article.file!,
-                      height: 200,
-                      width: .infinity,
-                      fit: .cover,
-                      fadeInDuration: const Duration(milliseconds: 1000),
-                      progressIndicatorBuilder: (context, url, progress) =>
-                          article.imgblur == null
-                          ? const ImageShimmer(
-                              width: .infinity,
-                              height: 200,
-                              borderRadius: .vertical(top: .circular(16)),
-                            )
-                          : BlurHash(
+                    child: Stack(
+                      children: [
+                        if (article.imgblur != null)
+                          SizedBox(
+                            width: double.infinity,
+                            height: 200,
+                            child: BlurHash(
                               hash: article.imgblur!,
                               optimizationMode: .approximation,
+                              color: AppColors.scaffoldBackgroundColor,
                               duration: .zero,
                             ),
-                      errorWidget: (context, url, error) => Center(
-                        child: Icon(
-                          Icons.broken_image,
-                          size: 48,
-                          color: Colors.grey.withOpacityCustom(0.5),
+                          ),
+                        CachedNetworkImage(
+                          cacheKey: article.file,
+                          imageUrl: article.file!,
+                          height: 200,
+                          width: .infinity,
+                          fit: .cover,
+                          fadeInDuration: const Duration(milliseconds: 1000),
+                          fadeOutDuration: Duration.zero,
+                          progressIndicatorBuilder: (context, url, progress) =>
+                              article.imgblur == null
+                              ? const ImageShimmer(
+                                  width: .infinity,
+                                  height: 200,
+                                  borderRadius: .vertical(top: .circular(16)),
+                                )
+                              : SizedBox(
+                                  width: double.infinity,
+                                  height: 200,
+                                  child: BlurHash(
+                                    hash: article.imgblur!,
+                                    optimizationMode: .approximation,
+                                    color: AppColors.scaffoldBackgroundColor,
+                                    duration: .zero,
+                                  ),
+                                ),
+                          errorWidget: (context, url, error) => Center(
+                            child: Icon(
+                              Icons.broken_image,
+                              size: 48,
+                              color: Colors.grey.withOpacityCustom(0.5),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),

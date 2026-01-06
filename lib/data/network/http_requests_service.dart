@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'custom_http_response.dart';
-import '../../utils/constants/endpoint_constants.dart';
 import 'package:http/http.dart' as http;
+
+import '../../utils/constants/endpoint_constants.dart';
 import '../../utils/network_utils.dart';
+import 'custom_http_response.dart';
 
 class HttpRequestsService {
   static Duration durationTimeout = const Duration(seconds: 30);

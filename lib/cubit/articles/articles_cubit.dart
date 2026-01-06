@@ -15,26 +15,26 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
   }
 
   List<ArticleModel> temp = <ArticleModel>[];
-  IdNameModel? currentTag;
+  List<IdNameModel> currentTags = <IdNameModel>[];
 
   Future<void> fetchArticles({
     BuildContext? context,
     bool setInitial = false,
-    IdNameModel? tag,
+    List<IdNameModel>? tags,
   }) async {
     if (state.isAllPagesLoaded && !setInitial) return;
     if (setInitial) {
       temp = <ArticleModel>[];
-      emit(ArticlesState.initial().copyWith(tags: state.tags));
+      emit(ArticlesState.initial().copyWith(tags: state.tags, page: 1));
     }
-    currentTag = tag;
+    currentTags = tags ?? currentTags;
     processApiRequest(
       context: context,
       showError: true,
       showLoader: true,
       request: appRepository.articleRepository.getArticles(
         state.page,
-        currentTag?.name,
+        currentTags.isNotEmpty ? currentTags.map((e) => e.name).toList() : null,
       ),
       onSuccess: (result) {
         if (state.page == 1) {
