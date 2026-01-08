@@ -2,7 +2,7 @@ name: ilmalogiya
 description: "A new Flutter project."
 publish_to: 'none'
 
-version: 1.0.4+8
+version: 1.1.0+9
 
 environment:
   sdk: ^3.10.4
@@ -32,6 +32,9 @@ dependencies:
   app_links: ^7.0.0
   share_plus: ^12.0.1
   flutter_blurhash: ^0.9.1
+  sqflite: ^2.4.2
+  path: ^1.9.1
+  connectivity_plus: ^7.0.0
 
 dev_dependencies:
   flutter_test:

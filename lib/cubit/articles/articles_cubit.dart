@@ -25,7 +25,8 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
     if (state.isAllPagesLoaded && !setInitial) return;
     if (setInitial) {
       temp = <ArticleModel>[];
-      emit(ArticlesState.initial().copyWith(tags: state.tags, page: 1));
+      fetchTags();
+      emit(ArticlesState.initial().copyWith(page: 1));
     }
     currentTags = tags ?? currentTags;
     processApiRequest(
