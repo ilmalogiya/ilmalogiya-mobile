@@ -5,7 +5,7 @@ import 'app_colors.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
-    fontFamily: "Lora",
+    fontFamily: "Lato",
     scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.scaffoldBackgroundColor,
