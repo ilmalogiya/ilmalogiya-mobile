@@ -56,7 +56,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: const .all(6),
+        padding: const .only(top: 8, bottom: 24, left: 12, right: 12),
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: AppColors.cardColor,
