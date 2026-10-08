@@ -1,12 +1,12 @@
-import 'dart:convert';
-import 'dart:io';
+import "dart:convert";
+import "dart:io";
 
-import 'package:http/http.dart' as http;
+import "package:http/http.dart" as http;
 
-import '../../utils/constants/endpoint_constants.dart';
-import '../../utils/network_utils.dart';
-import '../../utils/app_logger.dart';
-import 'custom_http_response.dart';
+import "../../utils/constants/endpoint_constants.dart";
+import "../../utils/network_utils.dart";
+import "../../utils/app_logger.dart";
+import "custom_http_response.dart";
 
 class HttpRequestsService {
   static Duration durationTimeout = const Duration(seconds: 30);
@@ -21,7 +21,11 @@ class HttpRequestsService {
     Map<String, dynamic>? queryParams = const {},
     required String endPoint,
   }) async {
-    Uri uri = Uri.https(UrlConstants.baseApiUrl, "/api/$endPoint", queryParams);
+    final Uri uri = Uri.https(
+      UrlConstants.baseApiUrl,
+      "/api/$endPoint",
+      queryParams,
+    );
 
     AppLogger.logRequest(
       method: "GET",
@@ -31,7 +35,7 @@ class HttpRequestsService {
     );
 
     try {
-      http.Response response = await http
+      final http.Response response = await http
           .get(uri, headers: getHeaders())
           .timeout(durationTimeout);
 
@@ -42,11 +46,11 @@ class HttpRequestsService {
       );
 
       if (response.statusCode == HttpStatus.ok) {
-        var result = jsonDecode(response.body);
+        final result = jsonDecode(response.body);
         return CustomHttpResponse(
           data: result,
           statusCode: response.statusCode,
-          message: 'Success',
+          message: "Success",
         );
       }
       return handleHttpErrors(response);

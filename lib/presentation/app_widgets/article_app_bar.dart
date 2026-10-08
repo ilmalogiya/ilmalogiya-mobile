@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
-import '../../utils/constants/routes.dart';
-import '../../generated/assets/assets.gen.dart';
-import '../../utils/ui/app_colors.dart';
+import "package:flutter/material.dart";
+
+import "../../utils/constants/routes.dart";
+import "../../generated/assets/assets.gen.dart";
+import "../../utils/ui/app_colors.dart";
 
 class ArticleAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ArticleAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isRoot = ModalRoute.of(context)?.isFirst ?? false;
+    final bool isRoot = ModalRoute.of(context)?.isFirst ?? false;
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(

@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
 
-import '../data/models/article/article_model.dart';
-import '../utils/constants/routes.dart';
-import 'articles/article_detail/article_detail_screen.dart';
-import 'articles/articles_screen.dart';
-import 'articles/search_article/search_article_screen.dart';
+import "../data/models/article/article_model.dart";
+import "../utils/constants/routes.dart";
+import "app_widgets/bottom_nav_blur_widget.dart";
+import "articles/article_detail/article_detail_screen.dart";
+import "articles/articles_screen.dart";
+import "articles/search_article/search_article_screen.dart";
 
 class AppRouter {
   static Route? generateRoute(RouteSettings settings) {
@@ -21,12 +22,14 @@ class AppRouter {
       default:
         return navigate(
           Scaffold(
-            body: Center(child: Text('No route defined for ${settings.name}')),
+            body: Center(child: Text("No route defined for ${settings.name}")),
           ),
         );
     }
   }
 
-  static CupertinoPageRoute navigate(Widget widget) =>
-      CupertinoPageRoute(builder: (context) => widget);
+  static CupertinoPageRoute navigate(Widget widget) => CupertinoPageRoute(
+    builder: (context) =>
+        Stack(children: [widget, const BottomNavBlurWidget()]),
+  );
 }

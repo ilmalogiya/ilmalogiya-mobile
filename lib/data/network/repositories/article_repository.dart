@@ -1,10 +1,11 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import '../../datasources/local/article_local_data_source.dart';
-import '../../models/article/article_model.dart';
-import '../../../utils/constants/endpoint_constants.dart';
-import '../../../utils/app_logger.dart';
-import '../custom_http_response.dart';
-import '../http_requests_service.dart';
+import "package:connectivity_plus/connectivity_plus.dart";
+
+import "../../datasources/local/article_local_data_source.dart";
+import "../../models/article/article_model.dart";
+import "../../../utils/constants/endpoint_constants.dart";
+import "../../../utils/app_logger.dart";
+import "../custom_http_response.dart";
+import "../http_requests_service.dart";
 
 class ArticleRepository {
   final ArticleLocalDataSource _localDataSource = ArticleLocalDataSource();
@@ -27,10 +28,9 @@ class ArticleRepository {
         }
         return CustomHttpResponse(
           data: {
-            'results': cachedArticles.map((e) => e.toJson()).toList(),
-            'next': null, // Indicate no more pages
+            "results": cachedArticles.map((e) => e.toJson()).toList(),
+            "next": null, // Indicate no more pages
           },
-          success: true,
           statusCode: 200,
         );
       } catch (e) {
@@ -41,19 +41,19 @@ class ArticleRepository {
       final response = await HttpRequestsService.getRequest(
         endPoint: UrlConstants.articles,
         queryParams: {
-          'page': page.toString(),
-          'page_size': '10',
-          if (tags != null) 'tag': tags.join(","),
+          "page": page.toString(),
+          "page_size": "10",
+          if (tags != null) "tag": tags.join(","),
         },
       );
 
       if (response.success &&
           response.data != null &&
-          response.data['results'] != null) {
+          response.data["results"] != null) {
         // Cache the results
         try {
           final List<ArticleModel> articles = ArticleModel.fromList(
-            response.data['results'],
+            response.data["results"],
           );
           await _localDataSource.saveArticles(articles);
         } catch (e) {
@@ -68,7 +68,7 @@ class ArticleRepository {
   Future<CustomHttpResponse> searchArticles(String query) =>
       HttpRequestsService.getRequest(
         endPoint: UrlConstants.articles,
-        queryParams: {'search': query, 'page_size': '10', 'page': '1'},
+        queryParams: {"search": query, "page_size": "10", "page": "1"},
       );
 
   Future<CustomHttpResponse> getArticle(String slug) async {
@@ -78,11 +78,7 @@ class ArticleRepository {
       try {
         final ArticleModel? article = await _localDataSource.getArticle(slug);
         if (article != null) {
-          return CustomHttpResponse(
-            data: article.toJson(),
-            success: true,
-            statusCode: 200,
-          );
+          return CustomHttpResponse(data: article.toJson(), statusCode: 200);
         } else {
           return CustomHttpResponse(
             message: "Maqola topilmadi (Oflayn)",
@@ -95,7 +91,7 @@ class ArticleRepository {
     } else {
       // Online
       final response = await HttpRequestsService.getRequest(
-        endPoint: '${UrlConstants.articles}$slug',
+        endPoint: "${UrlConstants.articles}$slug",
       );
       if (response.success && response.data != null) {
         try {

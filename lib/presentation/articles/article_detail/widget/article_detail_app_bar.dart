@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import '../../../../generated/assets/assets.gen.dart';
-import '../../../../utils/ui/app_colors.dart';
-import 'package:share_plus/share_plus.dart';
+import "package:flutter/material.dart";
+
+import "../../../../generated/assets/assets.gen.dart";
+import "../../../../utils/ui/app_colors.dart";
+
+import "package:share_plus/share_plus.dart";
 
 class ArticleDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {

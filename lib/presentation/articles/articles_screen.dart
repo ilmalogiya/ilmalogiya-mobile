@@ -1,14 +1,15 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:app_links/app_links.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../app/app.dart';
-import '../app_widgets/shimmer/card_item_shimmer.dart';
-import 'widget/articles_tag_widget.dart';
-import '../../cubit/articles/articles_cubit.dart';
-import '../app_widgets/article_app_bar.dart';
-import 'widget/article_card_widget.dart';
+import "package:app_links/app_links.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+
+import "../../app/app.dart";
+import "../app_widgets/shimmer/card_item_shimmer.dart";
+import "widget/articles_tag_widget.dart";
+import "../../cubit/articles/articles_cubit.dart";
+import "../app_widgets/article_app_bar.dart";
+import "widget/article_card_widget.dart";
 
 class ArticlesScreen extends StatefulWidget {
   const ArticlesScreen({super.key});
@@ -38,17 +39,17 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
 
   void handleNotifications() {
     notificationStreamController.stream.listen((data) {
-      if (mounted && data.containsKey('slug')) {
+      if (mounted && data.containsKey("slug")) {
         context.read<ArticlesCubit>().fetchArticle(
           context: context,
-          slug: data['slug'],
+          slug: data["slug"],
           forDetail: true,
         );
       }
     });
   }
 
-  void initAppLink() async {
+  void initAppLink() {
     _sub = _appLinks.uriLinkStream.listen((uri) {
       final segments = uri.pathSegments;
       if (segments.length == 2 && mounted) {
@@ -85,7 +86,11 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
               child: ListView.builder(
                 controller: scrollController,
                 physics: const BouncingScrollPhysics(),
-                padding: const .symmetric(horizontal: 16.0),
+                padding: EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  bottom: 16.0 + MediaQuery.paddingOf(context).bottom,
+                ),
                 itemCount: state.isLoading()
                     ? 20
                     : 1 +
@@ -95,7 +100,6 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                   if (index == 0) {
                     return Column(
                       crossAxisAlignment: .start,
-                      mainAxisAlignment: .start,
                       mainAxisSize: .min,
                       children: [
                         ArticlesTagWidget(
@@ -119,7 +123,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.8,
                               child: Text(
-                                'Kechirasiz, siz tanlagan taglar bo\'yicha hali maqolalar mavjud emas',
+                                "Kechirasiz, siz tanlagan taglar bo'yicha hali maqolalar mavjud emas",
                                 style: Theme.of(context).textTheme.titleMedium,
                                 textAlign: .center,
                               ),
@@ -150,7 +154,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 26.0, vertical: 8),
           child: Text(
-            'Voy nimadur xato ketdi qayta urinib ko\'ring :)',
+            "Voy nimadur xato ketdi qayta urinib ko'ring :)",
             style: Theme.of(context).textTheme.titleMedium,
             textAlign: .center,
           ),

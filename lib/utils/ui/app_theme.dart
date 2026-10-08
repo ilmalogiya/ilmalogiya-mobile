@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 
-import 'app_colors.dart';
+import "app_colors.dart";
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -10,8 +10,12 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.scaffoldBackgroundColor,
       systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
         statusBarIconBrightness: .dark,
         statusBarBrightness: .light,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarIconBrightness: .dark,
       ),
       titleTextStyle: TextStyle(
         fontWeight: FontWeight.w700,

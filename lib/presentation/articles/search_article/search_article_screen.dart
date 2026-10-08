@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../app/app.dart';
-import '../../../cubit/articles/articles_cubit.dart';
-import '../../../data/network/app_repository.dart';
-import 'cubit/search_articles_cubit.dart';
-import 'widgte/search_app_bar.dart';
-import '../widget/article_card_widget.dart';
-import '../../../utils/search_delayer.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+
+import "../../../app/app.dart";
+import "../../../cubit/articles/articles_cubit.dart";
+import "../../../data/network/app_repository.dart";
+import "cubit/search_articles_cubit.dart";
+import "widgte/search_app_bar.dart";
+import "../widget/article_card_widget.dart";
+import "../../../utils/search_delayer.dart";
 
 class SearchArticleScreen extends StatefulWidget {
   const SearchArticleScreen({super.key});
@@ -87,15 +88,20 @@ class _SearchArticleScreenState extends State<SearchArticleScreen>
               return const Center(child: CircularProgressIndicator());
             }
             if (_searchController.text.isEmpty) {
-              return const Center(child: Text('Qidiruvni boshlang… :)'));
+              return const Center(child: Text("Qidiruvni boshlang… :)"));
             }
             if (state.articles.isEmpty) {
-              return const Center(child: Text('Hmm… bu safar natija yo‘q :('));
+              return const Center(child: Text("Hmm… bu safar natija yo‘q :("));
             }
             return ListView.builder(
               controller: _scrollController,
               physics: const BouncingScrollPhysics(),
-              padding: const .all(16.0),
+              padding: EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                top: 16.0,
+                bottom: 16.0 + MediaQuery.paddingOf(context).bottom,
+              ),
               itemCount: state.articles.length,
               itemBuilder: (context, index) =>
                   ArticleCardWidget(article: state.articles[index]),

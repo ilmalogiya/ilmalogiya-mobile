@@ -1,6 +1,62 @@
+analyzer:
+  exclude:
+    # Generated files
+    - "**/*.freezed.dart"
+    - "**/*.g.dart"
+    
+    # Generated / platform-specific folders
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+
+# Default Flutter lint rules
 include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
+    # ================================
+    # CONST & IMMUTABILITY
+    # ================================
     prefer_const_constructors: true
     prefer_const_literals_to_create_immutables: true
+    prefer_const_declarations: true
+    prefer_const_constructors_in_immutables: true
+
+    # ================================
+    # CODE QUALITY & CLEAN CODE
+    # ================================
+    avoid_unnecessary_containers: true
+    avoid_redundant_argument_values: true
+    unnecessary_this: true
+    unnecessary_async: true
+    avoid_unused_constructor_parameters: true
+    unreachable_from_main: true
+
+    # ================================
+    # PERFORMANCE & OPTIMIZATION
+    # ================================
+    prefer_final_fields: true
+    prefer_final_locals: true
+
+    # ================================
+    # FLUTTER WIDGETS
+    # ================================
+    sized_box_for_whitespace: true
+    use_colored_box: true
+    use_decorated_box: true
+    sort_child_properties_last: true
+
+    # ================================
+    # CODE STYLE
+    # ================================
+    prefer_double_quotes: true
+    prefer_single_quotes: false
+
+    # ================================
+    # DEBUGGING
+    # ================================
+    avoid_print: true

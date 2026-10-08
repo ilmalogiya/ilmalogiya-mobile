@@ -1,4 +1,4 @@
-part of 'articles_cubit.dart';
+part of "articles_cubit.dart";
 
 class ArticlesState extends BaseState {
   const ArticlesState({
@@ -17,15 +17,11 @@ class ArticlesState extends BaseState {
   final bool isAllPagesLoaded;
 
   factory ArticlesState.initial() => const ArticlesState(
-    status: .pure,
-    actionMessage: "",
-    errorMessage: "",
     articles: <ArticleModel>[],
     tags: <IdNameModel>[],
     page: 1,
     isAllPagesLoaded: false,
   );
-
 
   bool isLoading() => status == .submissionInProgress && page == 1;
 

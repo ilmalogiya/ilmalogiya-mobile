@@ -1,15 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'widget/article_detail_app_bar.dart';
-import 'package:photo_opener/photo_opener.dart';
-import 'package:share_plus/share_plus.dart';
-import '../../../cubit/articles/articles_cubit.dart';
-import '../../../data/models/article/article_model.dart';
-import '../../app_widgets/shimmer/image_shimmer.dart';
-import '../../../utils/extensions/color_extensions.dart';
-import '../../../utils/extensions/string_extensions.dart';
-import '../../../utils/ui/app_colors.dart';
+import "package:cached_network_image/cached_network_image.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+
+import "widget/article_detail_app_bar.dart";
+
+import "package:photo_opener/photo_opener.dart";
+import "package:share_plus/share_plus.dart";
+
+import "../../../cubit/articles/articles_cubit.dart";
+import "../../../data/models/article/article_model.dart";
+import "../../app_widgets/shimmer/image_shimmer.dart";
+import "../../../utils/extensions/color_extensions.dart";
+import "../../../utils/extensions/string_extensions.dart";
+import "../../../utils/ui/app_colors.dart";
 
 class ArticleDetailScreen extends StatefulWidget {
   const ArticleDetailScreen({super.key, required this.article});
@@ -56,7 +59,12 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: const .only(top: 8, bottom: 24, left: 12, right: 12),
+        padding: EdgeInsets.only(
+          top: 8,
+          left: 12,
+          right: 12,
+          bottom: 24.0 + MediaQuery.paddingOf(context).bottom,
+        ),
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: AppColors.cardColor,
@@ -82,6 +90,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                         closeText: "Orqaga",
                         context: context,
                         images: [article.file!],
+                        type: PhotoType.network,
                       );
                     },
                     child: Hero(

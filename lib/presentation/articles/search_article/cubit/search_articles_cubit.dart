@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import '../../../../cubit/articles/articles_cubit.dart';
-import '../../../../cubit/base_cubit/base_cubit.dart';
-import '../../../../data/models/article/article_model.dart';
+import "package:flutter/material.dart";
+
+import "../../../../cubit/articles/articles_cubit.dart";
+import "../../../../cubit/base_cubit/base_cubit.dart";
+import "../../../../data/models/article/article_model.dart";
 
 class SearchArticlesCubit extends BaseCubit<ArticlesState> {
   SearchArticlesCubit({required super.appRepository})
@@ -11,11 +12,10 @@ class SearchArticlesCubit extends BaseCubit<ArticlesState> {
       processApiRequest(
         context: context,
         showError: true,
-        showLoader: true,
         request: appRepository.articleRepository.searchArticles(query),
         onSuccess: (result) {
-          List<ArticleModel> articles = ArticleModel.fromList(
-            result['results'],
+          final List<ArticleModel> articles = ArticleModel.fromList(
+            result["results"],
           );
           emit(state.copyWith(articles: articles, isAllPagesLoaded: true));
         },

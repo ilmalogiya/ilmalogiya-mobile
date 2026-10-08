@@ -1,4 +1,4 @@
-part of 'base_cubit.dart';
+part of "base_cubit.dart";
 
 class BaseState extends Equatable {
   const BaseState({

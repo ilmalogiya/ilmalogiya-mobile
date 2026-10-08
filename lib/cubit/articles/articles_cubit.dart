@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
-import '../../presentation/app_widgets/dialog/error_message_dialog.dart';
-import '../../utils/constants/routes.dart';
-import '../base_cubit/base_cubit.dart';
-import '../../data/models/article/article_model.dart';
-import '../../data/models/id_name/id_name_model.dart';
-import '../../data/models/status/form_status.dart';
+import "package:flutter/material.dart";
 
-part 'articles_state.dart';
+import "../../presentation/app_widgets/dialog/error_message_dialog.dart";
+import "../../utils/constants/routes.dart";
+import "../base_cubit/base_cubit.dart";
+import "../../data/models/article/article_model.dart";
+import "../../data/models/id_name/id_name_model.dart";
+import "../../data/models/status/form_status.dart";
+
+part "articles_state.dart";
 
 class ArticlesCubit extends BaseCubit<ArticlesState> {
   ArticlesCubit({required super.appRepository}) : super(state: .initial()) {
@@ -32,7 +33,6 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
     processApiRequest(
       context: context,
       showError: true,
-      showLoader: true,
       request: appRepository.articleRepository.getArticles(
         state.page,
         currentTags.isNotEmpty ? currentTags.map((e) => e.name).toList() : null,
@@ -41,14 +41,14 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
         if (state.page == 1) {
           temp = <ArticleModel>[];
         }
-        List<ArticleModel> newArticles = ArticleModel.fromList(
-          result['results'],
+        final List<ArticleModel> newArticles = ArticleModel.fromList(
+          result["results"],
         );
         temp.addAll(newArticles);
         emit(
           state.copyWith(
             articles: temp,
-            isAllPagesLoaded: result['next'] == null,
+            isAllPagesLoaded: result["next"] == null,
             page: state.page + 1,
           ),
         );
@@ -64,7 +64,6 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
     ArticleModel article = ArticleModel.empty();
     await processLessApiRequest(
       context: context,
-      showError: false,
       showLoader: forDetail,
       request: appRepository.articleRepository.getArticle(slug),
       onSuccess: (result) {
@@ -88,10 +87,9 @@ class ArticlesCubit extends BaseCubit<ArticlesState> {
   Future<void> fetchTags({BuildContext? context}) => processLessApiRequest(
     context: context,
     showError: true,
-    showLoader: true,
     request: appRepository.articleRepository.getTags(),
     onSuccess: (result) {
-      List<IdNameModel> tags = IdNameModel.fromList(result);
+      final List<IdNameModel> tags = IdNameModel.fromList(result);
       emit(state.copyWith(tags: tags));
     },
   );

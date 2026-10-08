@@ -1,12 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
-import '../../app_widgets/shimmer/image_shimmer.dart';
-import '../../../utils/constants/routes.dart';
-import '../../../utils/extensions/string_extensions.dart';
-import '../../../data/models/article/article_model.dart';
-import '../../../utils/extensions/color_extensions.dart';
-import '../../../utils/ui/app_colors.dart';
+import "package:cached_network_image/cached_network_image.dart";
+import "package:flutter/material.dart";
+import "package:flutter_blurhash/flutter_blurhash.dart";
+
+import "../../app_widgets/shimmer/image_shimmer.dart";
+import "../../../utils/constants/routes.dart";
+import "../../../utils/extensions/string_extensions.dart";
+import "../../../data/models/article/article_model.dart";
+import "../../../utils/extensions/color_extensions.dart";
+import "../../../utils/ui/app_colors.dart";
 
 class ArticleCardWidget extends StatelessWidget {
   const ArticleCardWidget({super.key, required this.article});

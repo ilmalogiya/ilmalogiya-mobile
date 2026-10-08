@@ -1,5 +1,5 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import "package:firebase_core/firebase_core.dart";
+import "package:firebase_messaging/firebase_messaging.dart";
 
 import "../app/app.dart";
 
@@ -12,14 +12,9 @@ Future<void> initFirebase() async {
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  await FirebaseMessaging.instance.requestPermission(
-    alert: true,
-    badge: true,
-    sound: true,
-    provisional: false,
-  );
+  await FirebaseMessaging.instance.requestPermission();
 
-  await FirebaseMessaging.instance.subscribeToTopic('news');
+  await FirebaseMessaging.instance.subscribeToTopic("news");
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {});
 

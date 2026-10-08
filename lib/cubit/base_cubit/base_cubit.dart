@@ -1,14 +1,14 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+import "package:equatable/equatable.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:loader_overlay/loader_overlay.dart";
 
-import '../../data/models/status/form_status.dart';
-import '../../data/network/app_repository.dart';
-import '../../data/network/custom_http_response.dart';
-import '../../presentation/app_widgets/dialog/error_message_dialog.dart';
+import "../../data/models/status/form_status.dart";
+import "../../data/network/app_repository.dart";
+import "../../data/network/custom_http_response.dart";
+import "../../presentation/app_widgets/dialog/error_message_dialog.dart";
 
-part 'base_state.dart';
+part "base_state.dart";
 
 class BaseCubit<TState extends BaseState> extends Cubit<TState> {
   BaseCubit({required TState state, required this.appRepository})
@@ -30,7 +30,7 @@ class BaseCubit<TState extends BaseState> extends Cubit<TState> {
       context.loaderOverlay.show();
     }
 
-    var result = await request;
+    final result = await request;
 
     if (context != null && context.mounted && context.loaderOverlay.visible) {
       context.loaderOverlay.hide();
@@ -64,7 +64,7 @@ class BaseCubit<TState extends BaseState> extends Cubit<TState> {
       context.loaderOverlay.show();
     }
 
-    var result = await request;
+    final result = await request;
 
     if (context != null && context.mounted && context.loaderOverlay.visible) {
       context.loaderOverlay.hide();
@@ -95,10 +95,9 @@ class BaseCubit<TState extends BaseState> extends Cubit<TState> {
     if (!progressLess) {
       emit(
         state.copyWith(
-              status: FormStatus.submissionFailure,
-              errorMessage: context == null ? errorText : null,
-            )
-            as TState,
+          status: FormStatus.submissionFailure,
+          errorMessage: context == null ? errorText : null,
+        ) as TState,
       );
     }
     if (onFailure != null) {
@@ -107,10 +106,9 @@ class BaseCubit<TState extends BaseState> extends Cubit<TState> {
     if (!progressLess) {
       emit(
         state.copyWith(
-              status: FormStatus.submissionFailure,
-              errorMessage: context == null ? errorText : null,
-            )
-            as TState,
+          status: FormStatus.submissionFailure,
+          errorMessage: context == null ? errorText : null,
+        ) as TState,
       );
     }
     if (showError && context != null && context.mounted) {

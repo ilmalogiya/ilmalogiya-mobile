@@ -1,13 +1,15 @@
-import 'dart:convert';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-import '../../models/article/article_model.dart';
+import "dart:convert";
+
+import "package:path/path.dart";
+import "package:sqflite/sqflite.dart";
+
+import "../../models/article/article_model.dart";
 
 class ArticleLocalDataSource {
-  static const String _tableName = 'articles';
-  static const String _columnSlug = 'slug';
-  static const String _columnJson = 'json';
-  static const String _columnUpdatedAt = 'updated_at';
+  static const String _tableName = "articles";
+  static const String _columnSlug = "slug";
+  static const String _columnJson = "json";
+  static const String _columnUpdatedAt = "updated_at";
 
   Database? _database;
 
@@ -20,19 +22,19 @@ class ArticleLocalDataSource {
   Future<Database> _initDatabase() async {
     final String path = join(
       await getDatabasesPath(),
-      'ilmalogiya_articles.db',
+      "ilmalogiya_articles.db",
     );
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        await db.execute('''
+        await db.execute("""
           CREATE TABLE $_tableName (
             $_columnSlug TEXT PRIMARY KEY,
             $_columnJson TEXT,
             $_columnUpdatedAt INTEGER
           )
-        ''');
+        """);
       },
     );
   }
@@ -41,7 +43,7 @@ class ArticleLocalDataSource {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
-      orderBy: '$_columnUpdatedAt DESC', // Show newest/recently updated first
+      orderBy: "$_columnUpdatedAt DESC", // Show newest/recently updated first
     );
 
     return List.generate(maps.length, (i) {
@@ -75,7 +77,7 @@ class ArticleLocalDataSource {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
-      where: '$_columnSlug = ?',
+      where: "$_columnSlug = ?",
       whereArgs: [slug],
     );
 

@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import '../../../data/models/id_name/id_name_model.dart';
-import '../../../utils/ui/app_colors.dart';
+import "package:flutter/material.dart";
+
+import "../../../data/models/id_name/id_name_model.dart";
+import "../../../utils/ui/app_colors.dart";
 
 class ArticlesTagWidget extends StatelessWidget {
   const ArticlesTagWidget({
@@ -58,9 +59,8 @@ class ArticlesTagWidget extends StatelessWidget {
           padding: const .symmetric(horizontal: 8, vertical: 6),
           child: Text(
             text,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: isSelected ? Colors.white : Colors.black,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium
+                ?.copyWith(color: isSelected ? Colors.white : Colors.black),
           ),
         ),
       ),

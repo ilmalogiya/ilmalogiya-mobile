@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
 
 class ImageFilterConverter implements JsonConverter<String?, String?> {
   const ImageFilterConverter();
@@ -9,12 +9,12 @@ class ImageFilterConverter implements JsonConverter<String?, String?> {
 
     final imageExtensions = [
       // Standart formatlar
-      '.jpg',
-      '.jpeg',
-      '.png',
-      '.webp',
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".webp",
     ];
-    bool isImage = imageExtensions.any(
+    final bool isImage = imageExtensions.any(
       (ext) => json.toLowerCase().endsWith(ext),
     );
 

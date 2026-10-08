@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'card_item_shimmer.dart';
+import "card_item_shimmer.dart";
 
 class ListShimmer extends StatelessWidget {
   const ListShimmer({super.key});

@@ -1,10 +1,10 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ilmalogiya/data/models/converters/image_filter_converter.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:ilmalogiya/data/models/converters/image_filter_converter.dart";
 
-part '../../../generated/article/article_model.freezed.dart';
-part '../../../generated/article/article_model.g.dart';
+part "../../../generated/article/article_model.freezed.dart";
+part "../../../generated/article/article_model.g.dart";
 
 @freezed
 abstract class ArticleModel with _$ArticleModel {
