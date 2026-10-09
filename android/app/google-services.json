@@ -12,7 +12,28 @@
           "package_name": "uz.afsona_group.ilmalogiya"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "157089587775-mh722ccpqprft1l8pridt9f63g1hgujo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.afsona_group.ilmalogiya",
+            "certificate_hash": "c99c74aabfd13e008f04268d11577ca37ffe238c"
+          }
+        },
+        {
+          "client_id": "157089587775-vccra03tgm5j70n22eokaa4e3ca96iqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.afsona_group.ilmalogiya",
+            "certificate_hash": "48f971abd896c28da5b2a6653e5e8941269eced5"
+          }
+        },
+        {
+          "client_id": "157089587775-adcqjclk75m55vc41cujn3b78btd2u4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAADlvpJ3KxaFFy_mD5IuqZe-t9E4bSmgc"
@@ -20,7 +41,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157089587775-adcqjclk75m55vc41cujn3b78btd2u4u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "157089587775-p3h5id1qb8pblmki8n0if9u5d56ssfq8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "uz.afsonagroup.ilmalogiya"
+              }
+            }
+          ]
         }
       }
     }
