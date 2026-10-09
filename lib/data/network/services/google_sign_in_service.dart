@@ -2,11 +2,16 @@ import "package:google_sign_in/google_sign_in.dart";
 import "../../../utils/app_logger.dart";
 
 class GoogleAuthService {
+  static const String serverClientId =
+      "157089587775-adcqjclk75m55vc41cujn3b78btd2u4u.apps.googleusercontent.com";
+
   bool _initialized = false;
 
   Future<void> _ensureInitialized() async {
     if (!_initialized) {
-      await GoogleSignIn.instance.initialize();
+      await GoogleSignIn.instance.initialize(
+        serverClientId: serverClientId,
+      );
       _initialized = true;
     }
   }
