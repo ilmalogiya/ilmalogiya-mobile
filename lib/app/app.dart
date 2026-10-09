@@ -7,6 +7,7 @@ import "package:keyboard_dismisser/keyboard_dismisser.dart";
 import "package:loader_overlay/loader_overlay.dart";
 
 import "../cubit/articles/articles_cubit.dart";
+import "../cubit/auth/auth_cubit.dart";
 import "../data/network/app_repository.dart";
 import "../presentation/router.dart";
 import "../utils/constants/routes.dart";
@@ -29,9 +30,12 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            lazy: false,
             create: (context) =>
                 ArticlesCubit(appRepository: context.read<AppRepository>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                AuthCubit(appRepository: context.read<AppRepository>()),
           ),
         ],
         child: const AppView(),
@@ -42,6 +46,7 @@ class App extends StatelessWidget {
 
 class AppView extends StatelessWidget {
   const AppView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return KeyboardDismisser(
@@ -70,7 +75,7 @@ class AppView extends StatelessWidget {
             darkTheme: dark,
             theme: light,
             onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: RouteNames.articlesRoute,
+            initialRoute: RouteNames.splashRoute,
             navigatorKey: navigatorKey,
             navigatorObservers: [routeObserver],
             builder: (context, child) => child!,
